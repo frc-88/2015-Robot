@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraight extends Command {
 
-	private static final double SPEED = 0.75;
+	private static final double SPEED = 0.7;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 3;
-	private static final double ANGLE_MULTIPLIER = 10;
+	private static final double ANGLE_MULTIPLIER = 0.05;
 
 	private double speed;
 	private double firstTarget;
@@ -41,7 +41,7 @@ public class DriveStraight extends Command {
 		inSpeedMode = true;
 		Robot.drive.setClosedLoopSpeed();
 		Robot.drive.resetEncoders();
-		Robot.drive.resetGyro();
+		Robot.drive.zeroYaw();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -49,7 +49,7 @@ public class DriveStraight extends Command {
 		double left, right, scale;
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
-		double angle = ANGLE_MULTIPLIER * Robot.drive.getGyroAngle();
+		double angle = ANGLE_MULTIPLIER * Robot.drive.getYaw();
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
@@ -109,10 +109,12 @@ public class DriveStraight extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.drive.setClosedLoopSpeed();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.drive.setClosedLoopSpeed();
 	}
 }

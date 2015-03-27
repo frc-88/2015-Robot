@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  */
 public class LiftDownOnePosition extends Command {
+	private double stillCount;
+	private double lastPosition;
 	private double target;
 	private boolean done;
 	
@@ -26,10 +28,13 @@ public class LiftDownOnePosition extends Command {
     protected void initialize() {
     	double position = Robot.lift.getPosition();
     	
+    	stillCount=0;
     	done = false;
     	
-    	if (position > Lift.POS_THREETOTES) {
-    		target = Lift.POS_THREETOTES;
+    	if (position > Lift.POS_FOURTOTES) {
+    		target = Lift.POS_FOURTOTES;
+    	} else if (position > Lift.POS_THREETOTES) {
+        		target = Lift.POS_THREETOTES;
     	} else if (position > Lift.POS_TWOTOTES) {
     		target = Lift.POS_TWOTOTES;
     	} else if (position > Lift.POS_ONETOTE) {
@@ -58,6 +63,13 @@ public class LiftDownOnePosition extends Command {
     	if (!done && ((position <= target) || Robot.lift.atLowerLimit())) {
     		done = true;
     	}
+		if (position == lastPosition) {
+			if (++stillCount > 5) {
+				done = true;
+			}
+		} else {
+			lastPosition = position;
+		}
     	
     	return done;
     }

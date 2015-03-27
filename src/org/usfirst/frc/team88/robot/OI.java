@@ -1,8 +1,10 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.AutoPickup;
 import org.usfirst.frc.team88.robot.commands.DecreaseMode;
 import org.usfirst.frc.team88.robot.commands.IncreaseMode;
 import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
+import org.usfirst.frc.team88.robot.commands.LiftStop;
 import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
@@ -50,13 +52,15 @@ public class OI {
         driverButtonA.whenPressed(new SchtickIn());
         driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new DriveToggleMaxSpeed());
+        driverButtonLeftBumper.whenPressed(new IncreaseMode());
+        driverButtonRightBumper.whenPressed(new DecreaseMode());
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());
-        operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
-        operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
-        operatorButtonX.whenPressed(new DecreaseMode());
-        operatorButtonY.whenPressed(new IncreaseMode());
+        operatorButtonLeftBumper.whenPressed(new SchtickIn());
+        operatorButtonRightBumper.whenPressed(new SchtickOut());
+        operatorButtonY.whenPressed(new AutoPickup());
+        operatorButtonX.whenPressed(new LiftStop());
         
     }
     public boolean getOperatorXButton(){

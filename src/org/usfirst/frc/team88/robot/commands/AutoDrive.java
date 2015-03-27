@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoDrive extends CommandGroup {
     
-    public  AutoDrive() {
-    	addSequential(new DriveStraight(3.5));
+    public  AutoDrive(double distance) {
+    	addSequential(new DriveStraight(distance));
     }
+
+    
 }

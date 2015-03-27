@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoBin extends CommandGroup {
+public class AutoBinForward extends CommandGroup {
     
-    public  AutoBin() {
+    public  AutoBinForward() {
     	addSequential(new LiftGrabberOpen());
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
@@ -17,9 +17,6 @@ public class AutoBin extends CommandGroup {
     	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
-    	addSequential(new DriveTurnLeft90NavX());
     	addSequential(new DriveStraight(3.4));
-    	addSequential(new DriveTurnRight90NavX());
-
     }
 }

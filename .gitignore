@@ -1,2 +1,5 @@
-bin
-*.class
+/deploy.xml
+/build/
+/dist/
+/bin/
+/sysProps.xml
